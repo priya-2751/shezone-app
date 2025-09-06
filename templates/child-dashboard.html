@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SheZone Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Bounce animation for icons */
+    @keyframes bounce-icon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    a:hover .icon {
+      animation: bounce-icon 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-tr from-pink-100 via-pink-50 to-pink-100 min-h-screen flex flex-col">
+
+  <header class="bg-pink-700 text-white text-center py-6 text-3xl font-extrabold tracking-wide shadow-lg select-none">
+    👧 SheZone - Child Dashboard
+  </header>
+
+  <main class="flex-1 p-8 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <a href="sos.html" 
+       class="group bg-pink-600 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-700 hover:scale-105 cursor-pointer text-white select-none">
+      <span class="icon text-6xl mb-4">🚨</span>
+      <span class="text-xl font-semibold tracking-wide">SOS Alert</span>
+    </a>
+
+    <a href="parent.html" 
+       class="group bg-pink-500 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-600 hover:scale-105 cursor-pointer text-white select-none">
+      <span class="icon text-6xl mb-4">👨‍👩‍👧</span>
+      <span class="text-xl font-semibold tracking-wide">Parent Connection</span>
+  </a>
+
+    <a href="contacts.html" 
+       class="group bg-pink-300 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-400 hover:scale-105 cursor-pointer text-pink-900 select-none">
+      <span class="icon text-6xl mb-4">📞</span>
+      <span class="text-xl font-semibold tracking-wide">Emergency Contacts</span>
+    </a>
+
+    <a href="settings.html" 
+       class="group bg-pink-200 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-300 hover:scale-105 cursor-pointer text-pink-900 select-none">
+      <span class="icon text-6xl mb-4">⚙️</span>
+      <span class="text-xl font-semibold tracking-wide">Settings</span>
+    </a>
+
+    <a href="child.html" 
+       class="group bg-pink-200 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-300 hover:scale-105 cursor-pointer text-pink-900 select-none">
+      <span class="icon text-6xl mb-4">📍</span>
+      <span class="text-xl font-semibold tracking-wide">share location</span>
+    </a>
+
+    <a href="/map" 
+   class="group bg-pink-400 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl
+          transform transition duration-300 hover:bg-pink-500 hover:scale-105 cursor-pointer text-white select-none">
+    <span class="icon text-6xl mb-4">🗺️</span>
+    <span class="text-xl font-semibold tracking-wide">Find Safe Route</span>
+</a>
+
+
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>📞 Emergency Contacts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffe4ec 0%, #fce7f3 100%);
+      font-family: 'Poppins', sans-serif;
+    }
+    .contact-card {
+      background: #f9d6e3;
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 8px 20px rgb(219 39 119 / 0.15);
+      transition: box-shadow 0.3s ease;
+    }
+    .contact-card:hover {
+      box-shadow: 0 12px 30px rgb(219 39 119 / 0.3);
+    }
+    .btn-call, .btn-sms {
+      transition: background-color 0.3s ease;
+    }
+    .btn-call:hover {
+      background-color: #db2777;
+    }
+    .btn-sms:hover {
+      background-color: #ec4899;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <header class="bg-pink-600 text-white text-center py-6 text-3xl font-extrabold tracking-wide shadow-md select-none rounded-b-3xl">
+    📞 Emergency Contacts
+  </header>
+
+  <main class="flex-1 max-w-xl mx-auto p-6 space-y-6">
+
+    <!-- Official Emergency Contacts -->
+    <section>
+      <h2 class="text-pink-700 text-2xl font-semibold mb-4 select-none">Official Emergency Contacts</h2>
+      <ul class="space-y-4">
+        <li class="contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="text-pink-900 font-semibold text-lg flex items-center gap-2 select-none">
+            👮 Police: <span class="ml-1 text-pink-700 font-normal">100</span>
+          </div>
+          <div class="flex gap-3">
+            <a href="tel:100" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
+            <a href="sms:100" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+          </div>
+        </li>
+        <li class="contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="text-pink-900 font-semibold text-lg flex items-center gap-2 select-none">
+            🚺 Women Helpline: <span class="ml-1 text-pink-700 font-normal">1091</span>
+          </div>
+          <div class="flex gap-3">
+            <a href="tel:1091" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
+            <a href="sms:1091" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+          </div>
+        </li>
+        <li class="contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="text-pink-900 font-semibold text-lg flex items-center gap-2 select-none">
+            🚑 Ambulance: <span class="ml-1 text-pink-700 font-normal">108</span>
+          </div>
+          <div class="flex gap-3">
+            <a href="tel:108" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
+            <a href="sms:108" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Personal Contacts (Dynamic) -->
+    <section>
+      <h2 class="text-pink-700 text-2xl font-semibold mb-4 select-none">Personal Contacts</h2>
+      <ul id="personalContactsList" class="space-y-4">
+        <!-- Dynamic contacts will be inserted here -->
+      </ul>
+    </section>
+
+    <div class="text-center mt-8">
+      <a href="index.html" class="text-pink-700 hover:text-pink-900 font-semibold text-lg transition-colors duration-300 select-none">
+        ⬅ Back to Dashboard
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    // Example dynamic personal contacts data
+    const personalContacts = [
+      { name: "Mom", emoji: "👩‍👧", phone: "+919876543210" },
+      { name: "Dad", emoji: "👨‍👧", phone: "+919123456789" },
+    ];
+
+    const listContainer = document.getElementById('personalContactsList');
+
+    personalContacts.forEach(contact => {
+      const li = document.createElement('li');
+      li.className = 'contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4';
+
+      li.innerHTML = `
+        <div class="text-pink-900 font-semibold text-lg flex items-center gap-2 select-none">
+          ${contact.emoji} ${contact.name}: <span class="ml-1 text-pink-700 font-normal">${contact.phone}</span>
+        </div>
+        <div class="flex gap-3">
+          <a href="tel:${contact.phone}" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
+          <a href="sms:${contact.phone}" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+        </div>
+      `;
+
+      listContainer.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>

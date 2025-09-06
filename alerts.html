@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parent Dashboard - SheZone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe4ec, #f8bbd9, #f48fb1);
+      color: #7a1f3d;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header i {
+      color: #e91e63;
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+    }
+    header h1 { font-weight: 800; font-size: 2.5rem; margin-bottom: 0.25rem; }
+    header p { font-style: italic; color: #c94f7c; font-size: 1.2rem; }
+
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media(min-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    @media(min-width: 1024px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: #fff0f6;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(156, 39, 81, 0.15);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card-header { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.5rem; color: #e91e63; }
+    .card-header i { font-size: 1.8rem; }
+
+    .alerts-list { overflow-y: auto; max-height: 300px; padding-right: 0.5rem; }
+    .alert-item {
+      background: linear-gradient(135deg, #ffd6e8, #ffb3d1);
+      border-left: 6px solid #e91e63;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .alert-item:hover { transform: translateY(-2px); }
+    .alert-message strong { color: #db2777; }
+    .alert-time { font-size: 0.85rem; color: #a33a5a; margin-left: 1rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <i class="fas fa-shield-alt"></i>
+    <h1>Parent Dashboard</h1>
+    <p>Receive real-time SOS alerts from your children</p>
+  </header>
+
+  <div class="card">
+    <div class="card-header"><i class="fas fa-exclamation-triangle"></i> SOS Alerts</div>
+    <div id="alerts-container" class="alerts-list" tabindex="0" aria-live="polite">
+      <p class="loading-text">Loading alerts...</p>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpd0NHTmbe1WTqdhK0Bw26xvrtRh05EoE",
+      authDomain: "shezoneapp.firebaseapp.com",
+      projectId: "shezoneapp",
+      storageBucket: "shezoneapp.appspot.com",
+      messagingSenderId: "178639823528",
+      appId: "1:178639823528:web:161605cc37dc724c7a589d",
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const alertsContainer = document.getElementById("alerts-container");
+
+    function renderAlerts(alerts) {
+      if (!alerts.length) {
+        alertsContainer.innerHTML = '<p class="loading-text">No SOS alerts at the moment.</p>';
+        return;
+      }
+      alertsContainer.innerHTML = "";
+      alerts.forEach(alert => {
+        const div = document.createElement("div");
+        div.className = "alert-item";
+        div.innerHTML = `
+          <span class="alert-message">${alert.message} at <strong>${alert.location}</strong> by ${alert.child_email}</span>
+          <span class="alert-time">${new Date(alert.timestamp.seconds * 1000).toLocaleString()}</span>
+        `;
+        alertsContainer.appendChild(div);
+      });
+    }
+
+    // Listen for real-time SOS alerts (all children)
+    db.collection("sos_alerts")
+      .where("resolved", "==", false)
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        const alerts = [];
+        snapshot.forEach(doc => alerts.push(doc.data()));
+        renderAlerts(alerts);
+      });
+  </script>
+</body>
+</html>

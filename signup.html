@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SheZone Signup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .icon { height: 1.2rem; width: 1.2rem; stroke: currentColor; fill: none; cursor: pointer; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-pink-100 via-pink-50 to-white">
+  <div class="flex flex-col items-center justify-center min-h-screen p-6">
+
+    <div class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-pink-100 w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="bg-gradient-to-r from-pink-500 to-pink-600 p-3 rounded-full w-fit mx-auto mb-4 inline-block">
+          <svg class="icon text-white" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2 class="text-3xl font-bold text-pink-800 mb-2">Create Account</h2>
+        <p class="text-gray-600">Sign up for your SheZone account</p>
+      </div>
+
+      <form id="signupForm" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-pink-800 mb-2">Full Name</label>
+          <input id="name" type="text" class="w-full pl-4 pr-4 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-400" placeholder="Enter your name" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-pink-800 mb-2">Email</label>
+          <input id="email" type="email" class="w-full pl-4 pr-4 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-400" placeholder="Enter your email" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-pink-800 mb-2">Password</label>
+          <div class="relative">
+            <input id="password" type="password" class="w-full pl-4 pr-10 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-400" placeholder="Enter password" required />
+            <svg id="togglePassword" class="icon absolute right-3 top-1/2 transform -translate-y-1/2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.5 12s4.5-7 9.5-7 9.5 7 9.5 7-4.5 7-9.5 7-9.5-7-9.5-7z"/></svg>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-pink-800 mb-2">Confirm Password</label>
+          <div class="relative">
+            <input id="confirmPassword" type="password" class="w-full pl-4 pr-10 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-400" placeholder="Confirm password" required />
+            <svg id="toggleConfirmPassword" class="icon absolute right-3 top-1/2 transform -translate-y-1/2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.5 12s4.5-7 9.5-7 9.5 7 9.5 7-4.5 7-9.5 7-9.5-7-9.5-7z"/></svg>
+          </div>
+        </div>
+
+        <div id="errorMsg" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm"></div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300">Sign Up</button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <p class="text-gray-600">
+          Already have an account?
+          <a href="login.html" class="text-pink-600 hover:text-pink-700 font-medium">Login here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpd0NHTmbe1WTqdhK0Bw26xvrtRh05EoE",
+      authDomain: "shezoneapp.firebaseapp.com",
+      projectId: "shezoneapp",
+      storageBucket: "shezoneapp.firebasestorage.app",
+      messagingSenderId: "178639823528",
+      appId: "1:178639823528:web:161605cc37dc724c7a589d",
+      measurementId: "G-C8TP9HVVFZ"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Toggle password visibility
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+
+    togglePassword.addEventListener("click", () => {
+      const pwd = document.getElementById("password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+    });
+
+    toggleConfirmPassword.addEventListener("click", () => {
+      const cpwd = document.getElementById("confirmPassword");
+      cpwd.type = cpwd.type === "password" ? "text" : "password";
+    });
+
+    // Signup form
+    const signupForm = document.getElementById("signupForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    signupForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const pwd = document.getElementById("password").value;
+      const cpwd = document.getElementById("confirmPassword").value;
+
+      if (pwd !== cpwd) {
+        errorMsg.textContent = "Passwords do not match!";
+        errorMsg.classList.remove("hidden");
+        return;
+      }
+
+      errorMsg.classList.add("hidden");
+
+      try {
+        // Create user in Firebase Authentication
+        const userCredential = await auth.createUserWithEmailAndPassword(email, pwd);
+        const user = userCredential.user;
+
+        // Save user details in Firestore
+        await db.collection("users").doc(user.uid).set({
+          name: name,
+          email: email,
+          role: "",          // Will select later in role.html
+          connectedWith: "", // Empty initially
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert("Signup successful!");
+        window.location.href = "role.html";
+
+      } catch (error) {
+        errorMsg.textContent = error.message;
+        errorMsg.classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>

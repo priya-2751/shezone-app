@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connect with Child - SheZone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffe4ec, #f8bbd9, #f48fb1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.5rem;
+      color: #6b0b3a;
+      margin: 0;
+    }
+    .container {
+      background: #fff0f6;
+      padding: 2.5rem 2rem 3rem;
+      border-radius: 30px;
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.35);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #d81e5b;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 4px rgba(216, 30, 91, 0.6);
+    }
+    #childName {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #880e4f;
+      margin-bottom: 1.5rem;
+      display: none; /* hidden until connected */
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border-radius: 25px;
+      border: 2.5px solid #f48fb1;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #6b0b3a;
+      background: #ffe4ec;
+      margin-bottom: 1.5rem;
+      outline: none;
+      box-shadow: inset 0 2px 6px rgba(255, 182, 193, 0.6);
+    }
+    input[type="email"]:focus {
+      border-color: #d81e5b;
+      background: #fff0f6;
+      box-shadow: 0 0 12px 3px rgba(216, 30, 91, 0.4);
+    }
+    button {
+      background: linear-gradient(90deg, #e91e63, #ad1457);
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.5rem;
+      box-shadow: 0 6px 15px rgba(216, 30, 91, 0.5);
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ad1457, #880e4f);
+      transform: scale(1.05);
+    }
+    #statusMsg {
+      margin-top: 1.5rem;
+      font-weight: 600;
+      min-height: 1.5rem;
+      color: #880e4f;
+      background: #fce4ec;
+      border-radius: 20px;
+      padding: 0.75rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" aria-label="Connect with Child form">
+    <h1>Connect with Child</h1>
+    <div id="childName"></div> <!-- ✅ Child's name will appear here -->
+    <input type="email" id="childEmail" placeholder="child@example.com" aria-label="Child's email" />
+    <button id="sendRequest">Send Connect Request</button>
+    <div id="statusMsg" role="alert"></div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpd0NHTmbe1WTqdhK0Bw26xvrtRh05EoE",
+      authDomain: "shezoneapp.firebaseapp.com",
+      projectId: "shezoneapp",
+      storageBucket: "shezoneapp.appspot.com",
+      messagingSenderId: "178639823528",
+      appId: "1:178639823528:web:161605cc37dc724c7a589d",
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    const sendRequestBtn = document.getElementById("sendRequest");
+    const emailInput = document.getElementById("childEmail");
+    const statusMsg = document.getElementById("statusMsg");
+    const childNameDiv = document.getElementById("childName");
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        statusMsg.textContent = "Please log in to connect with a child.";
+        sendRequestBtn.disabled = true;
+        return;
+      }
+
+      const parentUid = user.uid;
+      sendRequestBtn.disabled = false;
+
+      sendRequestBtn.addEventListener('click', async () => {
+        const childEmail = emailInput.value.trim();
+        if (!childEmail) {
+          statusMsg.textContent = "Please enter a valid email.";
+          return;
+        }
+
+        statusMsg.textContent = "Sending request...";
+        sendRequestBtn.disabled = true;
+
+        try {
+          // Find child by email
+          const childQuery = await db.collection("users").where("email", "==", childEmail).get();
+          if (childQuery.empty) {
+            statusMsg.textContent = "Child not found!";
+            sendRequestBtn.disabled = false;
+            return;
+          }
+
+          const childDoc = childQuery.docs[0];
+          const childId = childDoc.id;
+          const childData = childDoc.data();
+
+          // Add parent request
+          await db.collection("users").doc(childId).update({
+            pendingRequests: firebase.firestore.FieldValue.arrayUnion(parentUid)
+          });
+
+          // ✅ Show child’s name on top
+          childNameDiv.style.display = "block";
+          childNameDiv.textContent = `Connected Child: ${childData.name || childEmail}`;
+
+          statusMsg.textContent = `Request sent to ${childEmail}. Waiting for acceptance...`;
+          emailInput.value = '';
+        } catch (error) {
+          console.error(error);
+          statusMsg.textContent = error.message || "Error sending request.";
+        } finally {
+          sendRequestBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
