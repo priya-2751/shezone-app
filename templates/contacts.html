@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,8 +48,8 @@
             👮 Police: <span class="ml-1 text-pink-700 font-normal">100</span>
           </div>
           <div class="flex gap-3">
-            <a href="tel:100" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
-            <a href="sms:100" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+            <a href="tel:100" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md">Call</a>
+            <a href="sms:100" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md">SMS</a>
           </div>
         </li>
         <li class="contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -57,8 +57,8 @@
             🚺 Women Helpline: <span class="ml-1 text-pink-700 font-normal">1091</span>
           </div>
           <div class="flex gap-3">
-            <a href="tel:1091" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
-            <a href="sms:1091" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+            <a href="tel:1091" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md">Call</a>
+            <a href="sms:1091" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md">SMS</a>
           </div>
         </li>
         <li class="contact-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -66,8 +66,8 @@
             🚑 Ambulance: <span class="ml-1 text-pink-700 font-normal">108</span>
           </div>
           <div class="flex gap-3">
-            <a href="tel:108" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
-            <a href="sms:108" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+            <a href="tel:108" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md">Call</a>
+            <a href="sms:108" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md">SMS</a>
           </div>
         </li>
       </ul>
@@ -82,7 +82,7 @@
     </section>
 
     <div class="text-center mt-8">
-      <a href="index.html" class="text-pink-700 hover:text-pink-900 font-semibold text-lg transition-colors duration-300 select-none">
+      <a href="{{ url_for('child_dashboard') }}" class="text-pink-700 hover:text-pink-900 font-semibold text-lg transition-colors duration-300 select-none">
         ⬅ Back to Dashboard
       </a>
     </div>
@@ -107,8 +107,8 @@
           ${contact.emoji} ${contact.name}: <span class="ml-1 text-pink-700 font-normal">${contact.phone}</span>
         </div>
         <div class="flex gap-3">
-          <a href="tel:${contact.phone}" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-700 transition">Call</a>
-          <a href="sms:${contact.phone}" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-pink-600 transition">SMS</a>
+          <a href="tel:${contact.phone}" class="btn-call bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md">Call</a>
+          <a href="sms:${contact.phone}" class="btn-sms bg-pink-400 text-white px-5 py-2 rounded-full font-semibold shadow-md">SMS</a>
         </div>
       `;
 

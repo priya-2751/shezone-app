@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request
 import pandas as pd
 import folium
@@ -8,8 +9,8 @@ import webbrowser
 
 app = Flask(__name__)
 
-# ORS API key (replace with your own if needed)
-ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjU4Mzk4ODY3YWNlOTdmNWRjNmQwZWZiOTY1MmVjYjg4MGI1MWJjMDM5YjVkZTBkZWQ5MTdjNzRjIiwiaCI6Im11cm11cjY0In0="
+# ORS API key (replace with your own)
+ORS_API_KEY ="eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjU4Mzk4ODY3YWNlOTdmNWRjNmQwZWZiOTY1MmVjYjg4MGI1MWJjMDM5YjVkZTBkZWQ5MTdjNzRjIiwiaCI6Im11cm11cjY0In0="
 client = openrouteservice.Client(key=ORS_API_KEY)
 
 # Load crime data
@@ -27,12 +28,89 @@ def geocode_place(place_name):
         print("Geocoding error:", e)
     return None
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+# ---------- ROUTES ----------
+
+# LOGIN PAGE
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+# SIGNUP PAGE
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+# ROLE SELECTION
+@app.route("/role")
+def role():
+    return render_template("role.html")
+
+# CHILD DASHBOARD
+@app.route("/child-dashboard")
+def child_dashboard():
+    return render_template("child-dashboard.html")
+
+# PARENT DASHBOARD
+@app.route("/pdashboard")
+def parent_dashboard():
+    return render_template("pdashboard.html")
+
+# SOS PAGE
+@app.route("/sos")
+def sos():
+    return render_template("sos.html")
+
+# CONNECT CHILD
+@app.route("/connect-child")
+def connect_child():
+    return render_template("connect-child.html")
+
+# ALERTS
+@app.route("/alerts")
+def alerts():
+    return render_template("alerts.html")
+
+@app.route("/parent")
+def parent():
+    return render_template("parent.html")
+
+@app.route("/parents")
+def parents():
+    return render_template("parents.html")
+
+@app.route("/trackchild")
+def track_child():
+    return render_template("trackchild.html")
+
+# SETTINGS
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
+
+@app.route("/setting")
+def setting():
+    return render_template("setting.html")
+
+@app.route("/contacts")
+def contacts():
+    return render_template("contacts.html")
+
+@app.route("/findroute")
+def findroute():
+    return render_template("findroute.html")
+
+@app.route("/dashboard")
+def dashboard_page():
+    return render_template("dashboard.html")
+
+
+# SAFE ROUTE MAP
+@app.route("/map", methods=["GET", "POST"])
+def map_page():
     start_place = ""
     end_place = ""
     route_coords = []
-    map_center = [13.0827, 80.2707]  # Chennai default
+    map_center = [13.0827, 80.2707]  # Default Chennai
 
     if request.method == "POST":
         start_place = request.form.get("start")
@@ -93,8 +171,10 @@ def index():
     return render_template("map.html", folium_map=m._repr_html_(),
                            start_place=start_place, end_place=end_place)
 
+
+# Open browser automatically
 def open_browser():
-    webbrowser.open_new("http://127.0.0.1:5000")
+    webbrowser.open_new("http://127.0.0.1:5000/login")
 
 if __name__ == "__main__":
     threading.Timer(1.0, open_browser).start()

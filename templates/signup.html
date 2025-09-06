@@ -53,7 +53,7 @@
       <div class="mt-6 text-center">
         <p class="text-gray-600">
           Already have an account?
-          <a href="login.html" class="text-pink-600 hover:text-pink-700 font-medium">Login here</a>
+          <a href="{{ url_for('login') }}" class="text-pink-600 hover:text-pink-700 font-medium">Login here</a>
         </p>
       </div>
     </div>
@@ -69,10 +69,9 @@
       apiKey: "AIzaSyCpd0NHTmbe1WTqdhK0Bw26xvrtRh05EoE",
       authDomain: "shezoneapp.firebaseapp.com",
       projectId: "shezoneapp",
-      storageBucket: "shezoneapp.firebasestorage.app",
+      storageBucket: "shezoneapp.appspot.com",
       messagingSenderId: "178639823528",
-      appId: "1:178639823528:web:161605cc37dc724c7a589d",
-      measurementId: "G-C8TP9HVVFZ"
+      appId: "1:178639823528:web:161605cc37dc724c7a589d"
     };
 
     // Initialize Firebase
@@ -128,7 +127,7 @@
         });
 
         alert("Signup successful!");
-        window.location.href = "role.html";
+        window.location.href = "/role";
 
       } catch (error) {
         errorMsg.textContent = error.message;

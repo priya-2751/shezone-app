@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SheZone Dashboard</title>
+  <title>SheZone - Child Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Bounce animation for icons */
     @keyframes bounce-icon {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
@@ -24,44 +23,41 @@
 
   <main class="flex-1 p-8 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    <a href="sos.html" 
+    <a href="{{ url_for('sos') }}" 
        class="group bg-pink-600 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-700 hover:scale-105 cursor-pointer text-white select-none">
       <span class="icon text-6xl mb-4">🚨</span>
       <span class="text-xl font-semibold tracking-wide">SOS Alert</span>
     </a>
 
-    <a href="parent.html" 
+    <a href="{{ url_for('parent') }}" 
        class="group bg-pink-500 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-600 hover:scale-105 cursor-pointer text-white select-none">
       <span class="icon text-6xl mb-4">👨‍👩‍👧</span>
       <span class="text-xl font-semibold tracking-wide">Parent Connection</span>
-  </a>
+    </a>
 
-    <a href="contacts.html" 
+    <a href="{{ url_for('contacts') }}" 
        class="group bg-pink-300 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-400 hover:scale-105 cursor-pointer text-pink-900 select-none">
       <span class="icon text-6xl mb-4">📞</span>
       <span class="text-xl font-semibold tracking-wide">Emergency Contacts</span>
     </a>
 
-    <a href="settings.html" 
+    <a href="{{ url_for('settings') }}" 
        class="group bg-pink-200 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-300 hover:scale-105 cursor-pointer text-pink-900 select-none">
       <span class="icon text-6xl mb-4">⚙️</span>
       <span class="text-xl font-semibold tracking-wide">Settings</span>
     </a>
 
-    <a href="child.html" 
+    <a href="{{ url_for('findroute') }}" 
        class="group bg-pink-200 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-300 hover:scale-105 cursor-pointer text-pink-900 select-none">
       <span class="icon text-6xl mb-4">📍</span>
-      <span class="text-xl font-semibold tracking-wide">share location</span>
+      <span class="text-xl font-semibold tracking-wide">Share Location</span>
     </a>
 
-    <a href="/map" 
-   class="group bg-pink-400 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl
-          transform transition duration-300 hover:bg-pink-500 hover:scale-105 cursor-pointer text-white select-none">
-    <span class="icon text-6xl mb-4">🗺️</span>
-    <span class="text-xl font-semibold tracking-wide">Find Safe Route</span>
-</a>
-
-
+    <a href="{{ url_for('dashboard_page') }}" 
+       class="group bg-pink-400 rounded-2xl p-8 flex flex-col items-center justify-center shadow-xl transform transition duration-300 hover:bg-pink-500 hover:scale-105 cursor-pointer text-white select-none">
+      <span class="icon text-6xl mb-4">🗺️</span>
+      <span class="text-xl font-semibold tracking-wide">Find Safe Route</span>
+    </a>
 
   </main>
 

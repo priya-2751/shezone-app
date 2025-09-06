@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Settings</title>
+  <title>Setting</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -97,8 +97,8 @@
 </head>
 <body>
 
-  <div class="container" role="main" aria-label="Settings">
-    <header>⚙️ Settings</header>
+  <div class="container" role="main" aria-label="Setting">
+    <header>⚙️ Setting</header>
     <main>
       <button type="button" aria-label="Change Password">
         <span class="icon" aria-hidden="true">🔐</span> Change Password
@@ -110,7 +110,7 @@
         <span class="icon" aria-hidden="true">🚪</span> Logout
       </button>
     </main>
-    <a href="pdashboard.html" class="back-link" aria-label="Back to Dashboard">⬅ Back to Dashboard</a>
+    <a href="{{ url_for('parent_dashboard')}}" class="back-link" aria-label="Back to Dashboard">⬅ Back to Dashboard</a>
   </div>
 
 </body>

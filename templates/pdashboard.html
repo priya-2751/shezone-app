@@ -27,9 +27,7 @@
     .card {
       border-radius: 1.5rem;
       padding: 2rem 1.5rem;
-      box-shadow:
-        0 8px 20px rgba(219, 39, 119, 0.25),
-        inset 0 0 10px;
+      box-shadow: 0 8px 20px rgba(219, 39, 119, 0.25), inset 0 0 10px;
       transition: all 0.3s ease;
       cursor: pointer;
       text-align: center;
@@ -46,50 +44,20 @@
       font-weight: 700;
       margin-bottom: 0.75rem;
       text-shadow: 0 1px 3px rgba(219, 39, 119, 0.6);
-      transition: color 0.3s ease;
     }
     .card p {
       font-size: 1.05rem;
       font-weight: 600;
       line-height: 1.4;
-      transition: color 0.3s ease;
     }
     .card:hover {
       transform: translateY(-8px) scale(1.05);
       color: #fff;
-      box-shadow:
-        0 15px 30px rgba(219, 39, 119, 0.5),
-        inset 0 0 20px;
+      box-shadow: 0 15px 30px rgba(219, 39, 119, 0.5), inset 0 0 20px;
     }
     .card:hover h2,
     .card:hover p {
       color: #fff;
-    }
-    /* Subtle animated pink sparkles */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255 255 255 / 0.3), transparent 70%),
-        radial-gradient(circle at 70% 70%, rgba(255 255 255 / 0.2), transparent 70%);
-      opacity: 0.6;
-      pointer-events: none;
-      animation: sparkle 6s linear infinite;
-      border-radius: 1.5rem;
-      z-index: 0;
-    }
-    @keyframes sparkle {
-      0% { background-position: 0% 0%, 100% 100%; }
-      50% { background-position: 50% 50%, 50% 50%; }
-      100% { background-position: 0% 0%, 100% 100%; }
-    }
-    .card > * {
-      position: relative;
-      z-index: 1;
     }
     .grid-container {
       max-width: 7xl;
@@ -99,68 +67,20 @@
       grid-template-columns: repeat(1, 1fr);
     }
     @media (min-width: 640px) {
-      .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .grid-container { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 1024px) {
-      .grid-container {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .grid-container { grid-template-columns: repeat(4, 1fr); }
     }
-
     /* Different pink shades for each card */
-    .card-1 {
-      background: linear-gradient(145deg, #ffd6e8, #ffb3d1);
-      box-shadow:
-        0 8px 20px rgba(219, 39, 119, 0.25),
-        inset 0 0 10px #f48fb1;
-    }
-    .card-1:hover {
-      background: linear-gradient(145deg, #ff9ac1, #ff7aa8);
-      box-shadow:
-        0 15px 30px rgba(219, 39, 119, 0.5),
-        inset 0 0 20px #db2777;
-    }
-
-    .card-2 {
-      background: linear-gradient(145deg, #ffe0f0, #fbb1d1);
-      box-shadow:
-        0 8px 20px rgba(219, 39, 119, 0.2),
-        inset 0 0 10px #f9a8d4;
-    }
-    .card-2:hover {
-      background: linear-gradient(145deg, #f78fb3, #e7548a);
-      box-shadow:
-        0 15px 30px rgba(219, 39, 119, 0.6),
-        inset 0 0 20px #c2185b;
-    }
-
-    .card-3 {
-      background: linear-gradient(145deg, #ffd0e0, #fca3c1);
-      box-shadow:
-        0 8px 20px rgba(219, 39, 119, 0.22),
-        inset 0 0 10px #f48fb1;
-    }
-    .card-3:hover {
-      background: linear-gradient(145deg, #f06a9a, #d43f6e);
-      box-shadow:
-        0 15px 30px rgba(219, 39, 119, 0.55),
-        inset 0 0 20px #a91f4a;
-    }
-
-    .card-4 {
-      background: linear-gradient(145deg, #ffcee3, #f9a8d4);
-      box-shadow:
-        0 8px 20px rgba(219, 39, 119, 0.23),
-        inset 0 0 10px #f48fb1;
-    }
-    .card-4:hover {
-      background: linear-gradient(145deg, #e94a8a, #b72e5a);
-      box-shadow:
-        0 15px 30px rgba(219, 39, 119, 0.6),
-        inset 0 0 20px #7f1d3a;
-    }
+    .card-1 { background: linear-gradient(145deg, #ffd6e8, #ffb3d1); }
+    .card-1:hover { background: linear-gradient(145deg, #ff9ac1, #ff7aa8); }
+    .card-2 { background: linear-gradient(145deg, #ffe0f0, #fbb1d1); }
+    .card-2:hover { background: linear-gradient(145deg, #f78fb3, #e7548a); }
+    .card-3 { background: linear-gradient(145deg, #ffd0e0, #fca3c1); }
+    .card-3:hover { background: linear-gradient(145deg, #f06a9a, #d43f6e); }
+    .card-4 { background: linear-gradient(145deg, #ffcee3, #f9a8d4); }
+    .card-4:hover { background: linear-gradient(145deg, #e94a8a, #b72e5a); }
   </style>
 </head>
 <body>
@@ -168,25 +88,25 @@
 
   <div class="grid-container px-4">
     <!-- SOS Alerts Card -->
-    <a href="alerts.html" class="card card-1" aria-label="View SOS Alerts">
+    <a href="{{ url_for('alerts') }}" class="card card-1" aria-label="View SOS Alerts">
       <h2>SOS Alerts</h2>
       <p>View emergency alerts from your child.</p>
     </a>
 
-    <!-- Track Child Card -->
-    <a href="parents.html" class="card card-2" aria-label="Track Child Location">
+    <!-- Track Child -->
+    <a href="{{ url_for('parents') }}" class="card card-2" aria-label="Track Child Location">
       <h2>Track Child</h2>
       <p>Live GPS tracking of your child’s location.</p>
     </a>
 
-    <!-- Settings Card -->
-    <a href="setting.html" class="card card-3" aria-label="Manage Settings">
+    <!-- Settings -->
+    <a href="{{ url_for('setting') }}" class="card card-3" aria-label="Manage Settings">
       <h2>Settings</h2>
       <p>Manage your account and preferences.</p>
     </a>
 
-    <!-- Connect with Child Card -->
-    <a href="connect-child.html" class="card card-4" aria-label="Connect with Child">
+    <!-- Connect with Child -->
+    <a href="{{ url_for('connect_child') }}" class="card card-4" aria-label="Connect with Child">
       <h2>Connect with Child</h2>
       <p>Send messages or communicate directly with your child.</p>
     </a>

@@ -37,7 +37,7 @@
 
     <p class="text-center text-gray-600 mt-4">
       Don’t have an account? 
-      <a href="signup.html" class="text-pink-600 font-semibold hover:underline">Sign Up</a>
+      <a href="{{ url_for('signup') }}" class="text-pink-600 font-semibold hover:underline">Sign Up</a>
     </p>
   </div>
 
@@ -82,12 +82,13 @@
         const role = doc.data().role;
 
         if (role === "parent") {
-          window.location.href = "pdashboard.html";
+          window.location.href = "/pdashboard";
         } else if (role === "child") {
-          window.location.href = "child-dashboard.html";
+          window.location.href = "/child-dashboard";
+
         } else {
           alert("Please select your role first!");
-          window.location.href = "role.html";
+          window.location.href = "/role";
         }
       } catch (error) {
         errorMsg.textContent = error.message;

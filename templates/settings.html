@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Settings</title>
+  <title>⚙️ Settings</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -106,11 +106,11 @@
       <button type="button" aria-label="Privacy Settings">
         <span class="icon" aria-hidden="true">📍</span> Privacy Settings
       </button>
-      <button type="button" aria-label="Logout">
+      <button type="button" aria-label="Logout" onclick="window.location.href='/logout'">
         <span class="icon" aria-hidden="true">🚪</span> Logout
       </button>
     </main>
-    <a href="index.html" class="back-link" aria-label="Back to Dashboard">⬅ Back to Dashboard</a>
+    <a href="{{ url_for('child_dashboard') }}" class="back-link" aria-label="Back to Dashboard">⬅ Back to Dashboard</a>
   </div>
 
 </body>

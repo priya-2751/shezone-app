@@ -32,10 +32,10 @@
     function selectRole(role) {
       if (role === "parent") {
         alert("You selected Parent. Redirecting...");
-        window.location.href = "parent-dashboard.html"; // placeholder
+        window.location.href = "/pdashboard"; // placeholder
       } else {
         alert("You selected Child. Redirecting...");
-        window.location.href = "child-dashboard.html"; // placeholder
+        window.location.href = "/child-dashboard"; // placeholder
       }
     }
   </script>
@@ -69,7 +69,7 @@ async function selectRole(role) {
 
     if (!user) {
       alert("User not logged in!");
-      window.location.href = "login.html";
+      window.location.href = "/login";
       return;
     }
 
@@ -80,10 +80,10 @@ async function selectRole(role) {
 
     if (role === "parent") {
       alert("You selected Parent. Redirecting to Parent Dashboard...");
-      window.location.href = "pdashboard.html";
+      window.location.href = "/pdashboard";
     } else {
       alert("You selected Child. Redirecting to Child Dashboard...");
-      window.location.href = "child-dashboard.html";
+      window.location.href = "/child-dashboard";
     }
   } catch (error) {
     alert("Error: " + error.message);
