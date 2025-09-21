@@ -21,42 +21,41 @@ SheZone leverages geospatial machine learning, crime data visualization, and rou
 - **Maps**: Folium, OpenStreetMap, OpenRouteService API  
 - **Dataset**: `triplicane_crime.csv` (NCRB + local crime reports)  
 
----
 
 ## 📂 Project Structure
 
  SheZone/
- ├── README.md 
- ├── requirements.txt 
- ├── .env.example 
- │ ├── login.html
- | ├── role_select.html 
- │ ├── alerts.html
- │ ├── child-dashboard.html
- │ ├── child.html
- │ ├── connect-child.html 
- │ ├── role.html
- │ ├── setting.html
- │ ├── settings.html
- │ ├── signup.html
- │ ├── sos.html
- │ ├── track-child.html
- ├── .gitattributes
- ├── Procfile
- ├── Procfile.txt
- ├── app.py
- ├── apps.py
- ├── firebase_config.py
- ├── triplicane_crime_geocoded.csv
+ - ├── README.md 
+ - ├── requirements.txt 
+ - ├── .env.example 
+ - │ ├── login.html
+ - | ├── role_select.html 
+ - | ├── alerts.html
+ - │ ├── child-dashboard.html
+ - │ ├── child.html
+ - │ ├── connect-child.html 
+ - │ ├── role.html
+ - │ ├── setting.html
+ - │ ├── settings.html
+ - │ ├── signup.html
+ - │ ├── sos.html
+ - │ ├── track-child.html
+ - ├── .gitattributes
+ - ├── Procfile
+ - ├── Procfile.txt
+ - ├── app.py
+ - ├── apps.py
+ - ├── firebase_config.py
+ - ├── triplicane_crime_geocoded.csv
 
 
 ## Security Features
 
- -Unsafe Zone Marking – Highlights dangerous areas with ❌ based on crime data.
- -Safe Routing System – Suggests alternative paths through safer locations.
- -Real-Time Tracking – Location sharing between parent and child roles.
- -Emergency SOS – Quick alert system (future feature).
- -Data Privacy – Ensures sensitive data (like location) is not exposed publicly.
+ - **Unsafe Zone Marking**– Highlights dangerous areas with ❌ based on crime data.
+ - **Safe Routing System**– Suggests alternative paths through safer locations.
+ - **Real-Time Tracking**– Location sharing between parent and child roles.
+ - **Emergency SOS**– Quick alert system (future feature).
+ - **Data Privacy**– Ensures sensitive data (like location) is not exposed publicly.
 
 ## License
 
