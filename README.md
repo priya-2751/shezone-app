@@ -1,10 +1,10 @@
- 🚺 SheZone: A Women safety app using ml 
+## 🚺 SheZone: A Women safety app using ml 
 
 SheZone is a women-safety mobile/web application that predicts **unsafe zones** using past crime data and suggests **safe travel routes**.  
 It integrates **Machine Learning, GeoAI, and Map APIs** to enhance safety by avoiding risky areas.
 
 
-🌟 Features
+## 🌟 Features
 - 🔐 **Login & Role Selection** → User can log in as Parent or Child.  
 - 🗺️ **Interactive Map** → Unsafe zones marked with ❌ using past crime dataset.  
 - 📍 **Safe Route Suggestions** → Routes avoid unsafe areas and prioritize paths near police stations, shops, and crowded zones.  
