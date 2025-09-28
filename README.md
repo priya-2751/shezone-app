@@ -6,23 +6,23 @@ SheZone is an innovative women’s safety and navigation platform designed to pr
 ## Overview
 SheZone leverages geospatial machine learning, crime data visualization, and route optimization to help women travel more safely.
 
-## 🌟 Features
+## Features
 - 🔐 **Login & Role Selection** → User can log in as Parent or Child.  
-- 🗺️ **Interactive Map** → Unsafe zones marked with ❌ using past crime dataset.  
+- 🗺️ **Interactive Map** → Unsafe zones marked with using past crime dataset.  
 - 📍 **Safe Route Suggestions** → Routes avoid unsafe areas and prioritize paths near police stations, shops, and crowded zones.  
 - 🧠 **AI + ML Integration** → Uses clustering (DBSCAN, K-Means) and Random Forest for crime prediction.  
 - 🚦 **Real-Time Maps** → Embedded using Folium, Flask, and OpenRouteService API.
 
 
-## 🛠️ Tech Stack
-- **Frontend**: HTML, CSS (pink theme 🎀), JavaScript  
+## Tech Stack
+- **Frontend**: HTML, CSS , JavaScript  
 - **Backend**: Python (Flask)  
 - **ML Models**: Random Forest, DBSCAN, K-Means  
 - **Maps**: Folium, OpenStreetMap, OpenRouteService API  
-- **Dataset**: `triplicane_crime.csv` (NCRB + local crime reports)  
+- **Dataset**: triplicane_crime.csv
 
 
-## 📂 Project Structure
+##  Project Structure
 
  SheZone/
  - ├── README.md 
@@ -51,7 +51,7 @@ SheZone leverages geospatial machine learning, crime data visualization, and rou
 
 ## Security Features
 
- - **Unsafe Zone Marking**– Highlights dangerous areas with ❌ based on crime data.
+ - **Unsafe Zone Marking**– Highlights dangerous areas with based on crime data.
  - **Safe Routing System**– Suggests alternative paths through safer locations.
  - **Real-Time Tracking**– Location sharing between parent and child roles.
  - **Emergency SOS**– Quick alert system (future feature).
